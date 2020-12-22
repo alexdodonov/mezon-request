@@ -28,6 +28,16 @@ class Request
     private static $globalRouter = null;
 
     /**
+     * Method returns router
+     *
+     * @return ?Router router
+     */
+    public static function getRouter(): ?Router
+    {
+        return self::$globalRouter;
+    }
+
+    /**
      * Method registers router
      *
      * @param Router $router
