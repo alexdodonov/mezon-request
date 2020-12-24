@@ -136,7 +136,7 @@ class Request
         if ($param == 'session_id') {
             $return = self::getSessionId();
         } elseif (self::$globalRouter !== null && self::getRouter()->hasParam($param)) {
-            $return = self::$globalRouter()->getParam($param);
+            $return = self::$globalRouter->getParam($param);
         } elseif (isset($headers[$param])) {
             $return = $headers[$param];
         } elseif (isset($_POST[$param])) {
