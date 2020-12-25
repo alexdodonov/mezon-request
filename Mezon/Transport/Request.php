@@ -19,7 +19,6 @@ use Mezon\Router\Router;
 class Request
 {
 
-    // TODO unbind with router
     /**
      * Global router
      *
