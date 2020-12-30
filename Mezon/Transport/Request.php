@@ -146,4 +146,15 @@ class Request
 
         return $return;
     }
+    
+    /**
+     * Was the parameter submitted
+     * 
+     * @param string $param parameter name
+     * @return bool true if the parameter was submitted, false otherwise
+     */
+    public static function wasSubmitted(string $param): bool
+    {
+        return self::getParam($param, false) !== false;
+    }
 }
