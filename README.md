@@ -81,7 +81,7 @@ And then call:
 Request::getParam('session_id')
 ```
 
-Then this call will return <some token>.
+Then this call will return `<some token>`.
 
 # Wrappers
 
