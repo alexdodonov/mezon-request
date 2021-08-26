@@ -22,17 +22,21 @@ class Request
     /**
      * Global router
      *
-     * @var Router
+     * @var ?Router
      */
     private static $globalRouter = null;
 
     /**
      * Method returns router
      *
-     * @return ?Router router
+     * @return Router router
      */
-    public static function getRouter(): ?Router
+    public static function getRouter(): Router
     {
+        if (self::$globalRouter === null) {
+            throw (new \Exception('Router was not setup', - 1));
+        }
+
         return self::$globalRouter;
     }
 
@@ -146,11 +150,12 @@ class Request
 
         return $return;
     }
-    
+
     /**
      * Was the parameter submitted
-     * 
-     * @param string $param parameter name
+     *
+     * @param string $param
+     *            parameter name
      * @return bool true if the parameter was submitted, false otherwise
      */
     public static function wasSubmitted(string $param): bool

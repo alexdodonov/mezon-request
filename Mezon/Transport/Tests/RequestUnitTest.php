@@ -4,6 +4,9 @@ namespace Mezon\Transport\Tests;
 use PHPUnit\Framework\TestCase;
 use Mezon\Transport\Request;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class RequestUnitTest extends TestCase
 {
 
