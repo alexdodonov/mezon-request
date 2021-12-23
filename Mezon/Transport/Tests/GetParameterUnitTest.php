@@ -7,11 +7,11 @@ use Mezon\Transport\Request;
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class RequestUnitTest extends TestCase
+class GetParameterUnitTest extends TestCase
 {
 
     /**
-     * Testing get parameter fetchind
+     * Testing get parameter fetching
      */
     public function testGetParameter(): void
     {

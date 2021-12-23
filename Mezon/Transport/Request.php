@@ -74,8 +74,8 @@ class Request
      * Fetching auth token from headers
      *
      * @param array $headers
-     *            Request headers
-     * @return string Session id
+     *            request headers
+     * @return string session id
      */
     protected static function getSessionIdFromHeaders(array $headers)
     {
@@ -95,7 +95,7 @@ class Request
     /**
      * Method returns list of the request's headers
      *
-     * @return array Array of headers
+     * @return array array of headers
      */
     protected static function getHttpRequestHeaders(): array
     {
@@ -111,7 +111,7 @@ class Request
     /**
      * Method returns session id from HTTP header
      *
-     * @return string Session id
+     * @return string session id
      */
     protected static function getSessionId()
     {
@@ -127,7 +127,7 @@ class Request
      *            parameter name
      * @param mixed $default
      *            default value
-     * @return mixed Parameter value
+     * @return mixed parameter value
      * @codeCoverageIgnore
      */
     public static function getParam($param, $default = false)
@@ -149,6 +149,20 @@ class Request
         }
 
         return $return;
+    }
+
+    /**
+     * Method returns request parameter as string
+     *
+     * @param string $param
+     *            parameter name
+     * @param mixed $default
+     *            default value
+     * @return string parameter value
+     */
+    public static function getParamAsString($param, $default = false): string
+    {
+        return (string) static::getParam($param, $default);
     }
 
     /**
