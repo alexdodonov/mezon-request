@@ -73,7 +73,7 @@ class Request
     /**
      * Fetching auth token from headers
      *
-     * @param array $headers
+     * @param string[] $headers
      *            request headers
      * @return string session id
      */
@@ -128,6 +128,7 @@ class Request
      * @param mixed $default
      *            default value
      * @return mixed parameter value
+     * @psalm-suppress MixedAssignment
      * @codeCoverageIgnore
      */
     public static function getParam($param, $default = false)
