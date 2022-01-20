@@ -43,10 +43,10 @@ class Request
     /**
      * Method registers router
      *
-     * @param Router $router
+     * @param ?Router $router
      *            router
      */
-    public static function registerRouter(Router &$router): void
+    public static function registerRouter(?Router &$router): void
     {
         self::$globalRouter = $router;
     }
