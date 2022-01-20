@@ -95,7 +95,7 @@ class Request
     /**
      * Method returns list of the request's headers
      *
-     * @return array array of headers
+     * @return string[] array of headers
      */
     protected static function getHttpRequestHeaders(): array
     {
