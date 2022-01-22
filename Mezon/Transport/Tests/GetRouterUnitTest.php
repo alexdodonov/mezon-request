@@ -1,7 +1,6 @@
 <?php
 namespace Mezon\Transport\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Mezon\Transport\Request;
 use Mezon\Router\Router;
 
@@ -9,7 +8,7 @@ use Mezon\Router\Router;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class GetRouterUnitTest extends TestCase
+class GetRouterUnitTest extends RequestBaseTest
 {
 
     /**

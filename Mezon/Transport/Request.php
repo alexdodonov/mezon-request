@@ -2,6 +2,7 @@
 namespace Mezon\Transport;
 
 use Mezon\Router\Router;
+use Mezon\Headers\Layer;
 
 /**
  * Class Request
@@ -93,34 +94,6 @@ class Request
     }
 
     /**
-     * Method returns list of the request's headers
-     *
-     * @return string[] array of headers
-     */
-    protected static function getHttpRequestHeaders(): array
-    {
-        $headers = [];
-
-        if (function_exists('getallheaders')) {
-            $headers = getallheaders();
-        }
-
-        return $headers === false ? [] : $headers;
-    }
-
-    /**
-     * Method returns session id from HTTP header
-     *
-     * @return string session id
-     */
-    protected static function getSessionId()
-    {
-        $headers = self::getHttpRequestHeaders();
-
-        return self::getSessionIdFromHeaders($headers);
-    }
-
-    /**
      * Method returns request parameter
      *
      * @param string $param
@@ -133,12 +106,12 @@ class Request
      */
     public static function getParam($param, $default = false)
     {
-        $headers = self::getHttpRequestHeaders();
+        $headers = Layer::getAllHeaders();
 
         $return = $default;
 
         if ($param == 'session_id') {
-            $return = self::getSessionId();
+            $return = self::getSessionIdFromHeaders($headers);
         } elseif (self::$globalRouter !== null && self::getRouter()->hasParam($param)) {
             $return = self::$globalRouter->getParam($param);
         } elseif (isset($headers[$param])) {

@@ -1,14 +1,13 @@
 <?php
 namespace Mezon\Transport\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Mezon\Transport\Request;
 
 /**
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class GetCheckedUnitTest extends TestCase
+class GetCheckedUnitTest extends RequestBaseTest
 {
 
     /**
