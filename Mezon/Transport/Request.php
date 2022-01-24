@@ -78,7 +78,7 @@ class Request
      *            request headers
      * @return string session id
      */
-    protected static function getSessionIdFromHeaders(array $headers)
+    protected static function getSessionIdFromHeaders(array $headers): string
     {
         $basicPrefix = 'Basic ';
 
