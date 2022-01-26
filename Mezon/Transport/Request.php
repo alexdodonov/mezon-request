@@ -47,7 +47,7 @@ class Request
      * @param ?Router $router
      *            router
      */
-    public static function registerRouter(?Router &$router): void
+    public static function registerRouter(?Router $router): void
     {
         self::$globalRouter = $router;
     }
