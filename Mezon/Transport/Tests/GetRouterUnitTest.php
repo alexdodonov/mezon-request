@@ -8,7 +8,7 @@ use Mezon\Router\Router;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class GetRouterUnitTest extends RequestBaseTest
+class GetRouterUnitTest extends RequestBaseTests
 {
 
     /**

@@ -8,7 +8,7 @@ use Mezon\Conf\Conf;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class RequestBaseTest extends TestCase
+class RequestBaseTests extends TestCase
 {
 
     /**

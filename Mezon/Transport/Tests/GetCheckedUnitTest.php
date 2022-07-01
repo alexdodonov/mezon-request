@@ -7,7 +7,7 @@ use Mezon\Transport\Request;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class GetCheckedUnitTest extends RequestBaseTest
+class GetCheckedUnitTest extends RequestBaseTests
 {
 
     /**
