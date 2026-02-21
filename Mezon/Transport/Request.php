@@ -52,24 +52,10 @@ class Request
         self::$globalRouter = $router;
     }
 
-    /**
-     * Method hashes checkbox state
-     *
-     * @param string $fieldName
-     *            field name
-     * @param array $vars
-     *            check box values
-     * @return mixed hash item
-     */
-    public static function getChecked(string $fieldName, array $vars)
-    {
-        if (self::getParam($fieldName, false) !== false) {
-            // something was submitted
-            return $vars[0];
-        }
-
-        return $vars[1];
-    }
+    // TODO закомпилить юнит-тесты в пакете mezon-router
+    // TODO сделать чтобы проходила команда composer test -- т.е. все юниты в дочерних пакетах нормально отрабатывали
+    // TODO сделать чтобы проходила команда composer psalm -- т.е. все псалмы в дочерних пакетах нормально отрабатывали
+    // TODO сделать чтобы проходила команда composer infection -- т.е. все юниты в дочерних пакетах были максимально качественными
 
     /**
      * Fetching auth token from headers
@@ -103,8 +89,41 @@ class Request
      * @return mixed parameter value
      * @psalm-suppress MixedAssignment
      * @codeCoverageIgnore
+     * @deprecated
      */
     public static function getParam($param, $default = false)
+    {
+        $headers = Layer::getAllHeaders();
+
+        $return = $default;
+
+        if ($param == 'session_id') {
+            $return = self::getSessionIdFromHeaders($headers);
+        } elseif (self::$globalRouter !== null && self::getRouter()->hasParam($param)) {
+            $return = self::$globalRouter->getParam($param);
+        } elseif (isset($headers[$param])) {
+            $return = $headers[$param];
+        } elseif (isset($_POST[$param])) {
+            $return = $_POST[$param];
+        } elseif (isset($_GET[$param])) {
+            $return = $_GET[$param];
+        }
+
+        return $return;
+    }
+    
+    /**
+     * Method returns request parameter
+     *
+     * @param string $param
+     *            parameter name
+     * @param mixed $default
+     *            default value
+     * @return mixed parameter value
+     * @psalm-suppress MixedAssignment
+     * @codeCoverageIgnore
+     */
+    private static function getParamFromAllSources($param, $default = false)
     {
         $headers = Layer::getAllHeaders();
 
@@ -130,13 +149,27 @@ class Request
      *
      * @param string $param
      *            parameter name
-     * @param mixed $default
+     * @param string $default
      *            default value
      * @return string parameter value
      */
-    public static function getParamAsString($param, $default = false): string
+    public static function getParamAsString($param, $default = ''): string
     {
-        return (string) static::getParam($param, $default);
+        return (string) static::getParamFromAllSources($param, $default);
+    }
+
+    /**
+     * Method returns request parameter as int
+     *
+     * @param string $param
+     *            parameter name
+     * @param int $default
+     *            default value
+     * @return int parameter value
+     */
+    public static function getParamAsInt($param, $default = 0): int
+    {
+        return (int) static::getParamFromAllSources($param, $default);
     }
 
     /**
@@ -148,6 +181,25 @@ class Request
      */
     public static function wasSubmitted(string $param): bool
     {
-        return self::getParam($param, false) !== false;
+        return self::getParamFromAllSources($param, false) !== false;
+    }
+    
+    /**
+     * Method hashes checkbox state
+     *
+     * @param string $fieldName
+     *            field name
+     * @param array $vars
+     *            check box values
+     * @return mixed hash item
+     */
+    public static function getChecked(string $fieldName, array $vars)
+    {
+        if (self::getParamFromAllSources($fieldName, false) !== false) {
+            // something was submitted
+            return $vars[0];
+        }
+        
+        return $vars[1];
     }
 }
